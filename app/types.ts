@@ -10,4 +10,5 @@ export type Property = {
   badge: string
   type: string
   status: "For Sale" | "For Rent"
+  isFeatured?: boolean
 }

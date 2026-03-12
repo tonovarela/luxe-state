@@ -2,11 +2,23 @@ import Navbar from "./components/Navbar"
 import HeroSection from "./components/HeroSection"
 import FeaturedPropertyCard from "./components/FeaturedPropertyCard"
 import PropertyCard from "./components/PropertyCard"
-import { properties } from "./data/mockProperties"
+import Pagination from "./components/Pagination"
+import { getFeaturedProperties, getMarketProperties } from "@/lib/properties"
 
-export default function Home() {
-  const featuredProperties = properties.slice(0, 2)
-  const marketProperties = properties.slice(2)
+interface HomeProps {
+  searchParams: Promise<{ page?: string }>
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams
+  const currentPage = Math.max(1, parseInt(params.page ?? "1", 10))
+
+  const [featuredProperties, marketResult] = await Promise.all([
+    getFeaturedProperties(),
+    getMarketProperties(currentPage),
+  ])
+
+  const { data: marketProperties, totalPages } = marketResult
 
   return (
     <>
@@ -46,26 +58,15 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {marketProperties.map((property, index) => {
-              // Replicating the hidden states from code.html
-              let hiddenClass = ""
-              if (index === 4) hiddenClass = "hidden xl:flex"
-              if (index === 5) hiddenClass = "hidden lg:flex"
+            {marketProperties.map((property) => (
+              <PropertyCard
+                key={property.id}
+                property={property}
+              />
+            ))}
+          </div>
 
-              return (
-                <PropertyCard 
-                  key={property.id} 
-                  property={property} 
-                  className={hiddenClass} 
-                />
-              )
-            })}
-          </div>
-          <div className="mt-12 text-center">
-            <button className="px-8 py-3 bg-white border border-nordic-dark/10 hover:border-mosque hover:text-mosque text-nordic-dark font-medium rounded-lg transition-all hover:shadow-md">
-              Load more properties
-            </button>
-          </div>
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
         </section>
       </main>
     </>
