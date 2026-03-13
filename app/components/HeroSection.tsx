@@ -1,4 +1,11 @@
+"use client"
+
+import { useState } from "react"
+import FilterModal from "./FilterModal"
+
 export default function HeroSection() {
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
+
   return (
     <section className="py-12 md:py-16">
       <div className="max-w-3xl mx-auto text-center space-y-8">
@@ -44,11 +51,20 @@ export default function HeroSection() {
             Penthouse
           </button>
           <div className="w-px h-6 bg-nordic-dark/10 mx-2"></div>
-          <button className="whitespace-nowrap flex items-center gap-1 px-4 py-2 rounded-full text-nordic-dark font-medium text-sm hover:bg-black/5 transition-colors">
+          <button 
+            onClick={() => setIsFilterModalOpen(true)}
+            className="whitespace-nowrap flex items-center gap-1 px-4 py-2 rounded-full text-nordic-dark font-medium text-sm hover:bg-black/5 transition-colors"
+          >
             <span className="material-icons text-base">tune</span> Filters
           </button>
         </div>
       </div>
+
+      <FilterModal 
+        isOpen={isFilterModalOpen} 
+        onClose={() => setIsFilterModalOpen(false)} 
+      />
     </section>
   )
 }
+
