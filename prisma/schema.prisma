@@ -18,12 +18,27 @@ model Property {
   beds       Float
   baths      Float
   area       Float
-  imageUrl   String   @map("image_url")
   badge      String
   type       String
   status     String
+  latitude   Float    @default(37.4419)
+  longitude  Float    @default(-122.1430)
   isFeatured Boolean  @default(false) @map("is_featured")
+  slug       String   @unique
   createdAt  DateTime @default(now()) @map("created_at")
 
+  images     PropertyImage[]
+
   @@map("properties")
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  url        String
+  alt        String?
+  propertyId String   @map("property_id")
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("property_images")
 }

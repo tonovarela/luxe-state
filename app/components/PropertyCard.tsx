@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { type Property } from "@/app/types"
 
 interface PropertyCardProps {
@@ -20,12 +21,12 @@ export default function PropertyCard({ property, className = "" }: PropertyCardP
     return `$${price.toLocaleString()}`
   }
   return (
-    <article className={`bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${className}`}>
+    <Link href={`/property/${property.slug}`} className={`bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${className}`}>
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           alt={property.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          src={property.imageUrl}
+          src={property.images[0]?.url || ''}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           unoptimized // Need this if external domain isn't configured in next.config
@@ -66,6 +67,6 @@ export default function PropertyCard({ property, className = "" }: PropertyCardP
           </div>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }

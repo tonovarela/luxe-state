@@ -15,17 +15,21 @@ function mapRow(row: any): Property {
     beds: row.beds,
     baths: row.baths,
     area: row.area,
-    imageUrl: row.imageUrl,
     badge: row.badge,
     type: row.type,
     status: row.status as Property['status'],
     isFeatured: row.isFeatured,
+    latitude: row.latitude,
+    longitude: row.longitude,
+    slug: row.slug,
+    images: row.images || [],
   }
 }
 
 export async function getFeaturedProperties(): Promise<Property[]> {
   const data = await prisma.property.findMany({
     where: { isFeatured: true },
+    include: { images: true },
     orderBy: { id: 'asc' },
   })
   return data.map(mapRow)
@@ -46,6 +50,7 @@ export async function getMarketProperties(
   const [data, total] = await Promise.all([
     prisma.property.findMany({
       where: { isFeatured: false },
+      include: { images: true },
       orderBy: { createdAt: 'asc' },
       skip,
       take: PAGE_SIZE,
@@ -61,4 +66,15 @@ export async function getMarketProperties(
     totalPages,
     currentPage: page,
   }
+}
+
+export async function getPropertyBySlug(slug: string): Promise<Property | null> {
+  const data = await prisma.property.findUnique({
+    where: { slug },
+    include: { images: true },
+  })
+  
+  if (!data) return null
+  
+  return mapRow(data)
 }

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { type Property } from "@/app/types"
 
 interface FeaturedPropertyCardProps {
@@ -7,12 +8,12 @@ interface FeaturedPropertyCardProps {
 
 export default function FeaturedPropertyCard({ property }: FeaturedPropertyCardProps) {
   return (
-    <div className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer">
+    <Link href={`/property/${property.slug}`} className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer">
       <div className="aspect-[4/3] w-full overflow-hidden relative">
         <Image
           alt={property.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          src={property.imageUrl}
+          src={property.images[0]?.url || ''}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
           unoptimized // Need this if external domain isn't configured in next.config
@@ -53,6 +54,6 @@ export default function FeaturedPropertyCard({ property }: FeaturedPropertyCardP
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
