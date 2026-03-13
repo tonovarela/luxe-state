@@ -31,7 +31,7 @@ export default function PropertyCard({ property, className = "" }: PropertyCardP
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           unoptimized // Need this if external domain isn't configured in next.config
         />
-        <button className="absolute top-3 right-3 p-2 bg-white/90 rounded-full hover:bg-mosque hover:text-white transition-colors text-nordic-dark z-10">
+        <button className="absolute top-3 right-3 w-9 h-9 bg-white/90 rounded-full hover:bg-mosque hover:text-white transition-all text-nordic-dark z-10 flex items-center justify-center">
           <span className="material-icons text-lg">favorite_border</span>
         </button>
         <div 
