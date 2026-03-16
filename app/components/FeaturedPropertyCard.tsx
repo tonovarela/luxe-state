@@ -4,9 +4,16 @@ import { type Property } from "@/app/types"
 
 interface FeaturedPropertyCardProps {
   property: Property
+  dict?: any
 }
 
-export default function FeaturedPropertyCard({ property }: FeaturedPropertyCardProps) {
+export default function FeaturedPropertyCard({ property, dict = {} }: FeaturedPropertyCardProps) {
+  const t = {
+    beds: dict.beds || "Beds",
+    baths: dict.baths || "Baths",
+    sqft: dict.sqft || "m²"
+  }
+
   return (
     <Link href={`/property/${property.slug}`} className="group relative rounded-xl overflow-hidden shadow-soft bg-white cursor-pointer">
       <div className="aspect-[4/3] w-full overflow-hidden relative">
@@ -16,7 +23,7 @@ export default function FeaturedPropertyCard({ property }: FeaturedPropertyCardP
           src={property.images[0]?.url || ''}
           fill
           sizes="(max-width: 1024px) 100vw, 50vw"
-          unoptimized // Need this if external domain isn't configured in next.config
+          unoptimized
         />
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-nordic-dark z-10">
           {property.badge}
@@ -44,13 +51,13 @@ export default function FeaturedPropertyCard({ property }: FeaturedPropertyCardP
 
         <div className="flex items-center gap-6 mt-6 pt-6 border-t border-nordic-dark/5">
           <div className="flex items-center gap-2 text-nordic-muted text-sm">
-            <span className="material-icons text-lg">king_bed</span> {property.beds} Beds
+            <span className="material-icons text-lg">king_bed</span> {property.beds} {t.beds}
           </div>
           <div className="flex items-center gap-2 text-nordic-muted text-sm">
-            <span className="material-icons text-lg">bathtub</span> {property.baths} Baths
+            <span className="material-icons text-lg">bathtub</span> {property.baths} {t.baths}
           </div>
           <div className="flex items-center gap-2 text-nordic-muted text-sm">
-            <span className="material-icons text-lg">square_foot</span> {property.area.toLocaleString()} m²
+            <span className="material-icons text-lg">square_foot</span> {property.area.toLocaleString()} {t.sqft}
           </div>
         </div>
       </div>

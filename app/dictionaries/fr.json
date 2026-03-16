@@ -1,0 +1,42 @@
+{
+  "navbar": {
+    "buy": "Acheter",
+    "rent": "Louer",
+    "sell": "Vendre",
+    "savedHomes": "Favoris",
+    "luxeEstate": "LuxeEstate"
+  },
+  "hero": {
+    "title": "Trouvez votre",
+    "sanctuary": "sanctuaire",
+    "titleEnd": ".",
+    "searchPlaceholder": "Rechercher par ville, quartier...",
+    "searchButton": "Rechercher",
+    "searching": "...",
+    "all": "Tous",
+    "house": "Maison",
+    "apartment": "Appartement",
+    "villa": "Villa",
+    "penthouse": "Penthouse",
+    "filters": "Filtres"
+  },
+  "home": {
+    "featuredTitle": "Collections en Vedette",
+    "featuredSubtitle": "Des propriétés soigneusement sélectionnées.",
+    "viewAll": "Voir tout",
+    "searchResults": "Résultats de Recherche",
+    "newInMarket": "Nouveau sur le Marché",
+    "foundProperties": "{count} propriétés trouvées.",
+    "freshOpportunities": "Nouvelles opportunités ajoutées cette semaine.",
+    "all": "Tous",
+    "buy": "Acheter",
+    "rent": "Louer",
+    "noProperties": "Aucune propriété trouvée."
+  },
+  "propertyCard": {
+    "beds": "Lits",
+    "baths": "Salles de bain",
+    "sqft": "m²",
+    "viewDetails": "Voir les détails"
+  }
+}

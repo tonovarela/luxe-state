@@ -5,21 +5,30 @@ import { type Property } from "@/app/types"
 interface PropertyCardProps {
   property: Property
   className?: string
+  dict?: any
 }
 
-export default function PropertyCard({ property, className = "" }: PropertyCardProps) {
+export default function PropertyCard({ property, className = "", dict = {} }: PropertyCardProps) {
+  const t = {
+    beds: dict.beds || "Beds",
+    baths: dict.baths || "Baths",
+    sqft: dict.sqft || "m²",
+    mo: dict.mo || "/mo"
+  }
+
   // Format price helper
   const formatPrice = (price: number) => {
     if (property.status === "For Rent") {
       return (
         <>
           ${price.toLocaleString()}
-          <span className="text-sm font-normal text-nordic-muted">/mo</span>
+          <span className="text-sm font-normal text-nordic-muted">{t.mo}</span>
         </>
       )
     }
     return `$${price.toLocaleString()}`
   }
+
   return (
     <Link href={`/property/${property.slug}`} className={`bg-white rounded-xl overflow-hidden shadow-card hover:shadow-soft transition-all duration-300 group cursor-pointer h-full flex flex-col ${className}`}>
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -63,7 +72,7 @@ export default function PropertyCard({ property, className = "" }: PropertyCardP
             <span className="material-icons text-sm text-mosque/80">bathtub</span> {property.baths}
           </div>
           <div className="flex items-center gap-1 text-nordic-muted text-xs">
-            <span className="material-icons text-sm text-mosque/80">square_foot</span> {property.area}m²
+            <span className="material-icons text-sm text-mosque/80">square_foot</span> {property.area}{t.sqft}
           </div>
         </div>
       </div>
