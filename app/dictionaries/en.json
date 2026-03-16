@@ -63,5 +63,18 @@
     "withDown": "with 20% down",
     "calculateMortgage": "Calculate Mortgage",
     "rights": "© 2023 LuxeEstate Inc. All rights reserved."
+  },
+  "auth": {
+    "welcome": "Welcome to LuxeEstate",
+    "unlock": "Unlock exclusive properties worldwide.",
+    "continueGoogle": "Continue with Google",
+    "continueGithub": "Continue with GitHub",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "help": "Help Center",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
   }
 }

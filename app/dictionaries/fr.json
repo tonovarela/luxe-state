@@ -63,5 +63,18 @@
     "withDown": "avec 20% d'apport",
     "calculateMortgage": "Calculer l'Hypothèque",
     "rights": "© 2023 LuxeEstate Inc. Tous droits réservés."
+  },
+  "auth": {
+    "welcome": "Bienvenue sur LuxeEstate",
+    "unlock": "Débloquez des propriétés exclusives dans le monde entier.",
+    "continueGoogle": "Continuer avec Google",
+    "continueGithub": "Continuer avec GitHub",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "help": "Centre d'aide",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter"
   }
 }

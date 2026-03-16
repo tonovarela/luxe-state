@@ -2,18 +2,20 @@ import Image from "next/image"
 import Link from "next/link"
 import LanguageSelector from "./LanguageSelector"
 import { auth, signIn, signOut } from "@/auth"
+import UserDropdown from "./UserDropdown"
 
 export default async function Navbar({ dict = {}, currentLocale = "es" }: { dict?: any, currentLocale?: string }) {
   const session = await auth()
   
   // Use fallbacks in case dict is incomplete
   const t = {
-    buy: dict.buy || "Buy",
-    rent: dict.rent || "Rent",
-    sell: dict.sell || "Sell",
-    savedHomes: dict.savedHomes || "Saved Homes",
-    luxeEstate: dict.luxeEstate || "LuxeEstate",
-    signIn: dict.signIn || "Sign In"
+    buy: dict.navbar?.buy || dict.buy || "Buy",
+    rent: dict.navbar?.rent || dict.rent || "Rent",
+    sell: dict.navbar?.sell || dict.sell || "Sell",
+    savedHomes: dict.navbar?.savedHomes || dict.savedHomes || "Saved Homes",
+    luxeEstate: dict.navbar?.luxeEstate || dict.luxeEstate || "LuxeEstate",
+    signIn: dict.auth?.signIn || dict.signIn || "Sign In",
+    signOut: dict.auth?.signOut || dict.signOut || "Sign Out"
   }
 
   return (
@@ -53,29 +55,14 @@ export default async function Navbar({ dict = {}, currentLocale = "es" }: { dict
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light"></span>
             </button>
             {session?.user ? (
-              <form action={async () => {
-                "use server"
-                await signOut()
-              }}>
-                <button type="submit" title="Sign Out" className="flex items-center gap-2 pl-2 border-l border-nordic-dark/10 ml-2">
-                  <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all relative">
-                    {session.user.image ? (
-                      <Image
-                        alt={session.user.name || "Profile"}
-                        className="w-full h-full object-cover"
-                        src={session.user.image}
-                        fill
-                        unoptimized
-                        sizes="36px"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-mosque text-white flex items-center justify-center font-bold">
-                        {session.user.name?.[0]?.toUpperCase() || session.user.email?.[0]?.toUpperCase() || "U"}
-                      </div>
-                    )}
-                  </div>
-                </button>
-              </form>
+              <UserDropdown 
+                user={session.user} 
+                signOutText={t.signOut} 
+                onSignOut={async () => {
+                  "use server"
+                  await signOut()
+                }} 
+              />
             ) : (
               <Link href="/login" className="flex items-center pl-2 border-l border-nordic-dark/10 ml-2">
                 <span className="text-sm font-medium text-nordic-dark hover:text-mosque transition-colors">{t.signIn}</span>

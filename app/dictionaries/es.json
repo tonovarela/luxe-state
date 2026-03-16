@@ -63,5 +63,18 @@
     "withDown": "con 20% de enganche",
     "calculateMortgage": "Calcular Hipoteca",
     "rights": "© 2023 LuxeEstate Inc. Todos los derechos reservados."
+  },
+  "auth": {
+    "welcome": "Bienvenido a LuxeEstate",
+    "unlock": "Desbloquea propiedades exclusivas a nivel mundial.",
+    "continueGoogle": "Continuar con Google",
+    "continueGithub": "Continuar con GitHub",
+    "noAccount": "¿No tienes una cuenta?",
+    "signUp": "Regístrate",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "help": "Centro de Ayuda",
+    "signIn": "Entrar",
+    "signOut": "Salir"
   }
 }
