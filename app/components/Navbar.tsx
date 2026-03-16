@@ -1,15 +1,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import LanguageSelector from "./LanguageSelector"
+import { auth, signIn, signOut } from "@/auth"
 
-export default function Navbar({ dict = {}, currentLocale = "es" }: { dict?: any, currentLocale?: string }) {
+export default async function Navbar({ dict = {}, currentLocale = "es" }: { dict?: any, currentLocale?: string }) {
+  const session = await auth()
+  
   // Use fallbacks in case dict is incomplete
   const t = {
     buy: dict.buy || "Buy",
     rent: dict.rent || "Rent",
     sell: dict.sell || "Sell",
     savedHomes: dict.savedHomes || "Saved Homes",
-    luxeEstate: dict.luxeEstate || "LuxeEstate"
+    luxeEstate: dict.luxeEstate || "LuxeEstate",
+    signIn: dict.signIn || "Sign In"
   }
 
   return (
@@ -48,18 +52,35 @@ export default function Navbar({ dict = {}, currentLocale = "es" }: { dict?: any
               <span className="material-icons">notifications_none</span>
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light"></span>
             </button>
-            <button className="flex items-center gap-2 pl-2 border-l border-nordic-dark/10 ml-2">
-              <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all relative">
-                <Image
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAWhQZ663Bd08kmzjbOPmUk4UIxYooNONShMEFXLR-DtmVi6Oz-TiaY77SPwFk7g0OobkeZEOMvt6v29mSOD0Xm2g95WbBG3ZjWXmiABOUwGU0LOySRfVDo-JTXQ0-gtwjWxbmue0qDm91m-zEOEZwAW6iRFB1qC1bAU-wkjxm67Sbztq8w7srHkFT9bVEC86qG-FzhOBTomhAurNRmx9l8Yfqabk328NfdKuVLckgCdaPsNFE3yN65MeoRi05GA_gXIMwG4YDIeA"
-                  fill
-                  unoptimized
-                  sizes="36px"
-                />
-              </div>
-            </button>
+            {session?.user ? (
+              <form action={async () => {
+                "use server"
+                await signOut()
+              }}>
+                <button type="submit" title="Sign Out" className="flex items-center gap-2 pl-2 border-l border-nordic-dark/10 ml-2">
+                  <div className="w-9 h-9 rounded-full bg-gray-200 overflow-hidden ring-2 ring-transparent hover:ring-mosque transition-all relative">
+                    {session.user.image ? (
+                      <Image
+                        alt={session.user.name || "Profile"}
+                        className="w-full h-full object-cover"
+                        src={session.user.image}
+                        fill
+                        unoptimized
+                        sizes="36px"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-mosque text-white flex items-center justify-center font-bold">
+                        {session.user.name?.[0]?.toUpperCase() || session.user.email?.[0]?.toUpperCase() || "U"}
+                      </div>
+                    )}
+                  </div>
+                </button>
+              </form>
+            ) : (
+              <Link href="/login" className="flex items-center pl-2 border-l border-nordic-dark/10 ml-2">
+                <span className="text-sm font-medium text-nordic-dark hover:text-mosque transition-colors">{t.signIn}</span>
+              </Link>
+            )}
           </div>
         </div>
       </div>
