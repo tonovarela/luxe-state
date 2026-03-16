@@ -15,7 +15,8 @@ export default async function Navbar({ dict = {}, currentLocale = "es" }: { dict
     savedHomes: dict.navbar?.savedHomes || dict.savedHomes || "Saved Homes",
     luxeEstate: dict.navbar?.luxeEstate || dict.luxeEstate || "LuxeEstate",
     signIn: dict.auth?.signIn || dict.signIn || "Sign In",
-    signOut: dict.auth?.signOut || dict.signOut || "Sign Out"
+    signOut: dict.auth?.signOut || dict.signOut || "Sign Out",
+    admin: dict.navbar?.admin || dict.admin || "Admin Dashboard"
   }
 
   return (
@@ -42,6 +43,11 @@ export default async function Navbar({ dict = {}, currentLocale = "es" }: { dict
             <a className="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="#">
               {t.savedHomes}
             </a>
+            {session?.user?.role === "ADMIN" && (
+              <a className="text-nordic-dark/70 hover:text-nordic-dark font-medium text-sm hover:border-b-2 hover:border-nordic-dark/20 px-1 py-1 transition-all" href="/admin">
+                {t.admin}
+              </a>
+            )}
           </div>
 
           <div className="flex items-center space-x-4 ml-auto lg:space-x-6 relative z-10">
@@ -86,6 +92,11 @@ export default async function Navbar({ dict = {}, currentLocale = "es" }: { dict
           <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="#">
             {t.savedHomes}
           </a>
+          {session?.user?.role === "ADMIN" && (
+            <a className="block px-3 py-2 rounded-md text-base font-medium text-nordic-dark hover:bg-black/5" href="/admin">
+              {t.admin}
+            </a>
+          )}
         </div>
       </div>
     </nav>

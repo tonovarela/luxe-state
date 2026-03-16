@@ -5,6 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  // @ts-ignore - mismatch between beta versions of auth/core adapters
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
@@ -23,9 +24,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role
+      }
+      return token
+    },
     async session({ session, token }) {
       if (session.user && token.sub) {
         session.user.id = token.sub
+        if (token.role) {
+          session.user.role = token.role as string
+        }
       }
       return session
     },
