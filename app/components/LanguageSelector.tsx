@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation"
 import { useTransition } from "react"
 
 const languages = [
-  { code: "es", label: "Español" },
-  { code: "en", label: "English" },
-  { code: "fr", label: "Français" },
+  { code: "es", label: "🇪🇸 Español" },
+  { code: "en", label: "🇬🇧 English" },
+  { code: "fr", label: "🇫🇷 Français" },
 ]
 
 export default function LanguageSelector({ currentLocale }: { currentLocale: string }) {

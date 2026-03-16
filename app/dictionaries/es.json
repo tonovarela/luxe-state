@@ -38,5 +38,30 @@
     "baths": "Baños",
     "sqft": "m²",
     "viewDetails": "Ver Detalles"
+  },
+  "propertyPage": {
+    "topRatedAgent": "Agente Mejor Calificado",
+    "scheduleVisit": "Agendar Visita",
+    "contactAgent": "Contactar Agente",
+    "viewOnMap": "Ver en Mapa",
+    "propertyFeatures": "Características de la Propiedad",
+    "squareMeters": "Metros Cuadrados",
+    "bedrooms": "Habitaciones",
+    "bathrooms": "Baños",
+    "garage": "Garaje",
+    "aboutHome": "Acerca de esta casa",
+    "readMore": "Leer más",
+    "amenities": "Comodidades",
+    "smartHome": "Sistema de Casa Inteligente",
+    "pool": "Piscina",
+    "heating": "Calefacción y Aire Central",
+    "evCharging": "Carga para Vehículo Eléctrico",
+    "gym": "Gimnasio Privado",
+    "wineCellar": "Cava de Vinos",
+    "estimatedPayment": "Pago Estimado",
+    "startingFrom": "Desde",
+    "withDown": "con 20% de enganche",
+    "calculateMortgage": "Calcular Hipoteca",
+    "rights": "© 2023 LuxeEstate Inc. Todos los derechos reservados."
   }
 }

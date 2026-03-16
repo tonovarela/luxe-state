@@ -38,5 +38,30 @@
     "baths": "Baths",
     "sqft": "sqft",
     "viewDetails": "View Details"
+  },
+  "propertyPage": {
+    "topRatedAgent": "Top Rated Agent",
+    "scheduleVisit": "Schedule Visit",
+    "contactAgent": "Contact Agent",
+    "viewOnMap": "View on Map",
+    "propertyFeatures": "Property Features",
+    "squareMeters": "Square Meters",
+    "bedrooms": "Bedrooms",
+    "bathrooms": "Bathrooms",
+    "garage": "Garage",
+    "aboutHome": "About this home",
+    "readMore": "Read more",
+    "amenities": "Amenities",
+    "smartHome": "Smart Home System",
+    "pool": "Swimming Pool",
+    "heating": "Central Heating & Cooling",
+    "evCharging": "Electric Vehicle Charging",
+    "gym": "Private Gym",
+    "wineCellar": "Wine Cellar",
+    "estimatedPayment": "Estimated Payment",
+    "startingFrom": "Starting from",
+    "withDown": "with 20% down",
+    "calculateMortgage": "Calculate Mortgage",
+    "rights": "© 2023 LuxeEstate Inc. All rights reserved."
   }
 }
