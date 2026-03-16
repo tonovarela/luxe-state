@@ -21,6 +21,7 @@ model Property {
   badge      String
   type       String
   status     String
+  description String? @db.Text
   latitude   Float    @default(37.4419)
   longitude  Float    @default(-122.1430)
   isFeatured Boolean  @default(false) @map("is_featured")
